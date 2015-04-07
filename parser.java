@@ -15,7 +15,7 @@ public class parser {
 	 * @param args
 	 * @throws IOException
 	 */
-	public void main (String[] args) throws IOException
+	public static void main (String[] args) throws IOException
 	{	
 		Document doc = null;
 		String hostname = "http://sciencenetlinks.com";
@@ -31,8 +31,8 @@ public class parser {
 			{	
 				String gradeLevel = grades.get(j).text(); // get the grade levels
 				String link = hostname + e.child(0).child(0).attr("href"); // obtain link to tool page
-				String text = e.child(0).child(0).text(); // get the title
-				String desc = e.child(4).text(); // get description
+				String text = e.child(0).child(0).text(); // get the raw title
+				String desc = e.child(e.childNodeSize()-1).text(); // get description
 				String title = text.substring(0, text.length()-2); // truncate arrow from the title
 				tools.put(title, new HashMap<String, String>()); // add new title to library hashmap
 				tools.get(title).put("desc", desc); // insert description to title hashmap
@@ -42,9 +42,10 @@ public class parser {
 				Document specific_Tool = Jsoup.connect(link).get();
 				
 				// begin page specific parsing
-				pageSpecificParser(specific_Tool, tools.get(title));
+				//pageSpecificParser(specific_Tool, tools.get(title));
 				j++; // go to next tool
 			}
+			System.out.println("Processing page " + String.valueOf(i));
 		}
 		
 		// begin testing code
@@ -76,7 +77,7 @@ public class parser {
 	 * @param doc: the specific tool webpage to be parsed
 	 * @param title: hashmap for the specific tool
 	 */
-	private void pageSpecificParser (Document doc, HashMap title)
+	private static void pageSpecificParser (Document doc, HashMap title)
 	{
 		/* TO-DO:
 		 * 	lesson link
