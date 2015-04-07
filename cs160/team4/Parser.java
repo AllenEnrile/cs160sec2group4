@@ -54,7 +54,7 @@ public class Parser {
 				tools.put(title, new HashMap<String, String>()); // add new title to library hashmap
 				tools.get(title).put("desc", desc); // insert description to title hashmap
 				tools.get(title).put("grades", gradeLevel); // insert grade level to title hashmap
-				tools.get(title).put("time_scraped", String.valueOf(System.currentTimeMillis())); // insert timestamp in ms
+				//tools.get(title).put("time_scraped", String.valueOf(System.currentTimeMillis())); // insert timestamp in ms
 				
 				// load the tools page
 				Document specific_Tool = Jsoup.connect(link).get();
@@ -62,9 +62,9 @@ public class Parser {
 				// begin page specific parsing
 				pageSpecificParser(specific_Tool, tools.get(title));
 				j++; // go to next tool
-				System.out.println("Title: " + title);
-				System.out.print("Description: " + desc);
-				System.out.println("Grade Level: " + gradeLevel);
+				//System.out.println("Title: " + title);
+				//System.out.print("Description: " + desc);
+				//System.out.println("Grade Level: " + gradeLevel);
 			}
 			System.out.println("Processing page " + String.valueOf(i));
 		}
@@ -89,13 +89,15 @@ public class Parser {
 		 * 	time stamp		= new Timestamp(new java.util.Date().getTime())
 		 */
 		String link, image, timestamp;
-		ArrayList category = new ArrayList<String>(), content = new ArrayList<String>();
+		ArrayList<String> category = new ArrayList<String>(), content = new ArrayList<String>();
 		String sCategory = "";
 		String sContent = "";
 		
 		link = doc.select(".content").get(0).getElementsByTag("a").first().attr("href");	//lesson link
-		image = doc.select(".feature-image").select("img").first().absUrl("src");	// lesson image		
-		Elements e = doc.select(".block-list").get(1).getElementsByTag("a");
+		image = doc.select(".feature-image").select("img").first().absUrl("src");	// lesson image	
+		// http://sciencenetlinks.com/tools/try-engineering/
+		Elements e = doc.select(".block-list").get(1).getElementsByTag("a"); // need to check if themes are listed
+		
 		for (Element s : e)	{
 			category.add(s.text());
 			sCategory += s.text();// categories		

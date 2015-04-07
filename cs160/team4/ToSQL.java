@@ -41,7 +41,7 @@ public class ToSQL {
 			items.get("grades");
 			items.get("author");
 			items.get("content_type");
-			items.get("time_scraped");
+			items.get("timestamp");
 			*/
 		}
 		

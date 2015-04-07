@@ -11,7 +11,7 @@ public class Creation {
 		HashMap<String, HashMap<String, String>> tools = new HashMap<String, HashMap<String,String>>();
 		Parser prsr = new Parser("http://sciencenetlinks.com", tools);
 		ToSQL sql = new ToSQL(tools);
-		sql.hashtoSQL(tools);
+//		sql.hashtoSQL(tools);
 		try {
 			prsr.parse();
 		} catch (IOException e) {
