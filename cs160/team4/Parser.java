@@ -1,3 +1,4 @@
+package cs160.team4;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -7,19 +8,32 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
-public class parser {
+public class Parser {
+	
+	String hostname;
+	HashMap<String, HashMap<String, String>> tools;
+	
+	/**
+	 * 
+	 * @param hostname: top level hostname
+	 */
+	public Parser (String hostname, HashMap<String, HashMap<String,String>> tools)
+	{
+		this.hostname = hostname;
+		this.tools = tools;
+	}
 	
 	/**
 	 * Inital parser. Will loop through search results grabbing title, description and grade level
 	 * @author Allen Enrile
 	 * @param args
 	 * @throws IOException
+	 * @return HashMap of tools found and their specific data
 	 */
-	public static void main (String[] args) throws IOException
+	public HashMap parse () throws IOException
 	{	
 		Document doc = null;
-		String hostname = "http://sciencenetlinks.com";
-		HashMap<String, HashMap<String, String>> tools = new HashMap<String,HashMap<String, String>>();
+
 		
 		for (int i = 1; i < 27; i++)
 		{
@@ -47,28 +61,7 @@ public class parser {
 			}
 			System.out.println("Processing page " + String.valueOf(i));
 		}
-		
-		// begin testing code
-		
-		try {
-			doc = Jsoup.connect("http://sciencenetlinks.com/search/?q=&content_types=Tool&s=1").get();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Elements titles = doc.select(".detail h1 a");
-		
-		// get titles/links and print out
-		for (Element e : titles)
-		{
-			String link = hostname + e.attr("href");
-			System.out.println(e.text().substring(0 ,e.text().length()-2));
-			System.out.println(link);
-		}
-
-		// end testing code
-		
-		return;
+		return tools;
 	}
 	
 	/**
