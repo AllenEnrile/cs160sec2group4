@@ -94,7 +94,7 @@ public class Parser {
 		String sCategory = "";
 		String sContent = "";
 		
-		link = doc.select(".content").get(0).getElementsByTag("a").first().attr("href");	//lesson link
+		link = doc.select(".content").get(0).getElementsByTag("a").first().absUrl("href");	//lesson link
 		image = doc.select(".feature-image").select("img").first().absUrl("src");			// lesson image	
 		// http://sciencenetlinks.com/tools/try-engineering/
 		
