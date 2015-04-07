@@ -51,6 +51,7 @@ public class Parser {
 				tools.put(title, new HashMap<String, String>()); // add new title to library hashmap
 				tools.get(title).put("desc", desc); // insert description to title hashmap
 				tools.get(title).put("grades", gradeLevel); // insert grade level to title hashmap
+				tools.get(title).put("time_scraped", String.valueOf(System.currentTimeMillis())); // insert timestamp in ms
 				
 				// load the tools page
 				Document specific_Tool = Jsoup.connect(link).get();
