@@ -94,8 +94,31 @@ public class Parser {
 		String sContent = "";
 		
 		link = doc.select(".content").get(0).getElementsByTag("a").first().attr("href");	//lesson link
-		image = doc.select(".feature-image").select("img").first().absUrl("src");	// lesson image	
+		image = doc.select(".feature-image").select("img").first().absUrl("src");			// lesson image	
 		// http://sciencenetlinks.com/tools/try-engineering/
+		
+		for(int i=0; i < doc.select(".block-list").size(); i++)
+		{
+			//System.out.println(doc.select(".block-list").get(i).toString());
+			
+			if(doc.select(".block-list").get(i).toString().contains("themes"))	//checks if tool has categories
+			{
+				Elements themes = doc.select(".block-list").get(i).getElementsByTag("a");
+				for (Element e : themes)	{
+					category.add(e.text());
+					sCategory += e.text();// categories		
+				}
+			}
+			if(doc.select(".block-list").get(i).toString().contains("types"))	//checks if tool has content types
+			{
+				Elements types = doc.select(".block-list").get(i).getElementsByTag("a");
+				for (Element e : types)	{
+					content.add(e.text());
+					sContent += e.text();// content types		
+				}
+			}
+		}
+		/*
 		Elements e = doc.select(".block-list").get(1).getElementsByTag("a"); // need to check if themes are listed
 		
 		for (Element s : e)	{
@@ -106,7 +129,7 @@ public class Parser {
 		for (Element s : e)	{
 			content.add(s.text());
 			sContent += s.text();// content types		
-		}
+		}*/
 		timestamp = new Timestamp(new java.util.Date().getTime()).toString();	// time stamp
 		
 		title.put("link", link);
