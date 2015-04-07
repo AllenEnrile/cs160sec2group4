@@ -106,16 +106,18 @@ public class Parser {
 				Elements themes = doc.select(".block-list").get(i).getElementsByTag("a");
 				for (Element e : themes)	{
 					category.add(e.text());
-					sCategory += e.text();// categories		
+					sCategory += e.text() + ", ";// categories		
 				}
+				sCategory = sCategory.substring(0, sCategory.length()-2);
 			}
 			if(doc.select(".block-list").get(i).toString().contains("types"))	//checks if tool has content types
 			{
 				Elements types = doc.select(".block-list").get(i).getElementsByTag("a");
 				for (Element e : types)	{
 					content.add(e.text());
-					sContent += e.text();// content types		
+					sContent += e.text() + ", ";// content types		
 				}
+				sContent = sContent.substring(0, sContent.length()-2);
 			}
 		}
 		/*
