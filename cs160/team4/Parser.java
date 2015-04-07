@@ -74,13 +74,9 @@ public class Parser {
 	 * @param doc: the specific tool webpage to be parsed
 	 * @param title: hashmap for the specific tool
 	 */
-<<<<<<< HEAD:parser.java
-	private static void pageSpecificParser (Document doc, HashMap title)
-	{		
-=======
+
 	private void pageSpecificParser (Document doc, HashMap<String, String> title)
 	{
->>>>>>> 45da63835c053021bf5a17d320e0cc5e0383d2eb:cs160/team4/Parser.java
 		/* TO-DO:
 		 * 	lesson link		= doc.select(".content").get(0).getElementsByTag("a").first().attr("href")
 		 * 	lesson image	= .feature-image
