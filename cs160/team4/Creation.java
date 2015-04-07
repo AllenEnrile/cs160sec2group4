@@ -9,6 +9,7 @@ public class Creation {
 	{
 		HashMap<String, HashMap<String, String>> tools = new HashMap<String, HashMap<String,String>>();
 		Parser prsr = new Parser("http://sciencenetlinks.com", tools);
+		ToSQL sql = new ToSQL();
 		try {
 			prsr.parse();
 		} catch (IOException e) {

@@ -56,7 +56,7 @@ public class Parser {
 				Document specific_Tool = Jsoup.connect(link).get();
 				
 				// begin page specific parsing
-				//pageSpecificParser(specific_Tool, tools.get(title));
+				pageSpecificParser(specific_Tool, tools.get(title));
 				j++; // go to next tool
 			}
 			System.out.println("Processing page " + String.valueOf(i));
@@ -70,7 +70,7 @@ public class Parser {
 	 * @param doc: the specific tool webpage to be parsed
 	 * @param title: hashmap for the specific tool
 	 */
-	private static void pageSpecificParser (Document doc, HashMap title)
+	private void pageSpecificParser (Document doc, HashMap<String, String> title)
 	{
 		/* TO-DO:
 		 * 	lesson link
