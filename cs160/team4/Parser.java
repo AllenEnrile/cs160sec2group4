@@ -62,6 +62,9 @@ public class Parser {
 				// begin page specific parsing
 				pageSpecificParser(specific_Tool, tools.get(title));
 				j++; // go to next tool
+				System.out.println("Title: " + title);
+				System.out.print("Description: " + desc);
+				System.out.println("Grade Level: " + gradeLevel);
 			}
 			System.out.println("Processing page " + String.valueOf(i));
 		}
@@ -87,19 +90,27 @@ public class Parser {
 		 */
 		String link, image, timestamp;
 		ArrayList category = new ArrayList<String>(), content = new ArrayList<String>();
+		String sCategory = "";
+		String sContent = "";
 		
 		link = doc.select(".content").get(0).getElementsByTag("a").first().attr("href");	//lesson link
 		image = doc.select(".feature-image").select("img").first().absUrl("src");	// lesson image		
 		Elements e = doc.select(".block-list").get(1).getElementsByTag("a");
-		for (Element s : e)		category.add(s.text());	// categories		
+		for (Element s : e)	{
+			category.add(s.text());
+			sCategory += s.text();// categories		
+		}
 		e = doc.select(".block-list").get(2).getElementsByTag("a");
-		for (Element s : e)		content.add(s.text());	// content types		
+		for (Element s : e)	{
+			content.add(s.text());
+			sContent += s.text();// content types		
+		}
 		timestamp = new Timestamp(new java.util.Date().getTime()).toString();	// time stamp
 		
 		title.put("link", link);
 		title.put("image", image);
-		title.put("category", category);
-		title.put("content", content);
+		title.put("category", sCategory);
+		title.put("content", sContent);
 		title.put("timestamp", timestamp);
 
 		return;
