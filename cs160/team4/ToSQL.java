@@ -31,6 +31,7 @@ public class ToSQL {
 		 *  
 		*/
 		PrintWriter file = new PrintWriter("education_import.sql", "UTF-8");
+		int index = 1;
 		// loop through the entire hashmap
 		file.println("INSERT INTO `education` VALUES");
 		for (Map.Entry<String, HashMap<String, String>> entry : tools.entrySet())
@@ -38,18 +39,20 @@ public class ToSQL {
 			String title = entry.getKey(); // get the title
 			HashMap<String,String> items = entry.getValue(); // get the title specifics
 			StringBuilder statement = new StringBuilder(); // create insert statement
-			int index = 1;
+			String temp = new String();
 			
 			// obtain specifics		
 			statement.append("('" + String.valueOf(index) + "',"); // ID
+			title = title.replaceAll("'", "''");
 			statement.append("'" + title + "',"); // TITLE
-			statement.append("'" + items.get("desc") + "',"); // DESCRIPTION
+			temp = items.get("desc").replaceAll("'", "''");
+			statement.append("'" + temp + "',"); // DESCRIPTION
 			statement.append("'" + items.get("link") + "',"); // LINK
 			statement.append("'" + items.get("image") + "',"); // IMAGE
 			statement.append("'" + items.get("category") + "',"); // CAT
 			statement.append("'" + items.get("grades") + "',"); // GRADE LEVEL
 			statement.append("'',"); // AUTHOR
-			statement.append("'" + items.get("content_type") +"',"); // TYPE
+			statement.append("'" + items.get("content") +"',"); // TYPE
 			statement.append("'" + items.get("timestamp") + "'),"); // TIME_SCRAPED			
 			index++;
 			file.println(statement); // write to file last comma needs to be semicolon

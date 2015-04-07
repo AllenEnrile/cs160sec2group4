@@ -68,6 +68,7 @@ public class Parser {
 			}
 			System.out.println("Processing page " + String.valueOf(i));
 		}
+		System.out.println("Processing complete");
 		return tools;
 	}
 	
